@@ -20,10 +20,11 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
-\input{glyphtounicode}
 
-% Custom font
+% Custom font and PDF unicode handling
 \ifPDFTeX
+  \input{glyphtounicode}
+  \pdfgentounicode=1
   \usepackage[default]{lato}
 \else
   \usepackage{fontspec}
@@ -55,9 +56,6 @@
 \titleformat{\section}{
   \vspace{-4pt}\scshape\raggedright\large
 }{}{0em}{}[\color{black}\titlerule\vspace{-5pt}]
-
-% Ensure that generate pdf is machine readable/ATS parsable
-\pdfgentounicode=1
 
 %-------------------------%
 % Custom commands
