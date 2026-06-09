@@ -7,6 +7,7 @@
 
 \documentclass[letterpaper,11pt]{article}
 
+\usepackage{iftex}
 \usepackage{fontawesome5}
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
@@ -22,7 +23,14 @@
 \input{glyphtounicode}
 
 % Custom font
-\usepackage[default]{lato}
+\ifPDFTeX
+  \usepackage[default]{lato}
+\else
+  \usepackage{fontspec}
+  \IfFontExistsTF{Atkinson Hyperlegible Next}
+    {\setmainfont{Atkinson Hyperlegible Next}}
+    {\setmainfont{Atkinson Hyperlegible}}
+\fi
 
 \pagestyle{fancy}
 \fancyhf{}
