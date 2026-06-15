@@ -24,7 +24,7 @@
 \usepackage[english]{babel}
 \usepackage{tabularx}
 
-\input{resume-spacing.tex}
+\input{layout/spacing.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -46,15 +46,15 @@
 
 \titleformat{\section}{
   \bfseries\raggedright\large
-}{}{0em}{}[\color{black}\titlerule]
+}{}{\resumeSectionLabelSeparation}{}[\color{black}\titlerule]
 \titlespacing*{\section}{\resumeSectionLeftIndent}{\resumeSectionBeforeSpacing}{\resumeSectionAfterSpacing}
 
 \begin{document}
-\include{custom-commands}
+\input{layout/commands.tex}
 
-\input{src/heading.tex}
-\input{src/education.tex}
-\input{src/experience.tex}
-\input{src/projects.tex}
+\input{content/heading.tex}
+\input{content/education.tex}
+\input{content/experience.tex}
+\input{content/projects.tex}
 
 \end{document}
