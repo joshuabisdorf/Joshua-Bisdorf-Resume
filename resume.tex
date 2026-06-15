@@ -24,6 +24,8 @@
 \usepackage[english]{babel}
 \usepackage{tabularx}
 
+\input{resume-spacing.tex}
+
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfoot{}
@@ -45,7 +47,7 @@
 \titleformat{\section}{
   \bfseries\raggedright\large
 }{}{0em}{}[\color{black}\titlerule]
-\titlespacing*{\section}{0pt}{9pt}{4pt}
+\titlespacing*{\section}{0pt}{\resumeSectionBeforeSpacing}{\resumeSectionAfterSpacing}
 
 \begin{document}
 \include{custom-commands}
