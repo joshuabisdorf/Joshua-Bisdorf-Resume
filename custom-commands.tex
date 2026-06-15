@@ -1,51 +1,81 @@
 %-------------------------%
 % Custom commands
 
+% RME:
+% Requires: #1 contains a bullet body string that can be rendered by LaTeX.
+% Modifies: The active itemize environment by adding one bullet item.
+% Effects: Typesets a compact resume bullet.
+% Inputs: #1 = bullet text.
+% Outputs: One bullet item in the generated resume PDF.
 \newcommand{\resumeItem}[1]{
   \item\small{#1}
 }
 
+% RME:
+% Requires: #1-#4 contain organization, location, role or degree, and date text.
+% Modifies: The active resume subheading list by adding one two-line entry.
+% Effects: Typesets a primary education or experience heading with balanced spacing.
+% Inputs: #1 = left title; #2 = right location; #3 = left subtitle; #4 = right date.
+% Outputs: One primary heading block in the generated resume PDF.
 \newcommand{\resumeSubheading}[4]{
-  \vspace{-1pt}\item
+  \vspace{2pt}\item
     \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-5pt}
+    \end{tabular*}\vspace{-2pt}
 }
 
+% RME:
+% Requires: #1 and #2 contain role and date text.
+% Modifies: The active resume subheading list by adding one secondary entry.
+% Effects: Typesets an additional role under the previous organization with readable separation.
+% Inputs: #1 = left role text; #2 = right date text.
+% Outputs: One secondary heading block in the generated resume PDF.
 \newcommand{\resumeSubSubheading}[2]{
-    \vspace{1pt}\item
+    \vspace{4pt}\item
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
       \textit{\small#1} & \textit{\small #2} \\
-    \end{tabular*}\vspace{-5pt}
+    \end{tabular*}\vspace{-2pt}
 }
 
+% RME:
+% Requires: #1 and #2 contain project title/details and optional right-side text.
+% Modifies: The active resume subheading list by adding one project heading.
+% Effects: Typesets a project heading with modest separation before its bullets.
+% Inputs: #1 = project heading text; #2 = optional right-aligned text.
+% Outputs: One project heading block in the generated resume PDF.
 \newcommand{\resumeProjectHeading}[2]{
-    \vspace{1pt}\item
+    \vspace{4pt}\item
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
       \small#1 & #2 \\
-    \end{tabular*}\vspace{-5pt}
+    \end{tabular*}\vspace{-2pt}
 }
 
 % RME:
 % Requires: #1 contains a short non-bulleted detail line.
-% Modifies: The resume layout by adding one aligned detail row.
+% Modifies: The active education list by adding one aligned detail row.
 % Effects: Renders supporting education details without opening a bullet list.
 % Inputs: #1 = detail text.
 % Outputs: Typeset detail line in the generated resume PDF.
 \newcommand{\resumeEducationDetail}[1]{
-    \vspace{-1pt}\item[]
-    \small{#1}\vspace{-4pt}
+    \vspace{1pt}\item[]
+    \small{#1}\vspace{-2pt}
 }
 
-\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-3pt}}
+% RME:
+% Requires: #1 contains a nested bullet body string.
+% Modifies: The active itemize environment by adding one compact nested item.
+% Effects: Typesets a compact nested resume item.
+% Inputs: #1 = nested bullet text.
+% Outputs: One nested bullet item in the generated resume PDF.
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-2pt}}
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}, topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=2pt]}
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-3pt}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.25in, topsep=2pt, partopsep=0pt, parsep=0pt, itemsep=1pt]}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-4pt}}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}, topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-1pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.22in, topsep=3pt, partopsep=0pt, parsep=0pt, itemsep=2pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2pt}}
 
 \definecolor{Black}{RGB}{0, 0, 0}
 \newcommand{\seticon}[1]{\textcolor{Black}{\csname #1\endcsname}}
