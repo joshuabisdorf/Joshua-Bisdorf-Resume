@@ -14,68 +14,95 @@
 % RME:
 % Requires: #1-#4 contain organization, location, role or degree, and date text.
 % Modifies: The active resume subheading list by adding one two-line entry.
-% Effects: Typesets a primary education or experience heading with balanced spacing.
+% Effects: Typesets a primary education or experience heading using centralized spacing variables.
 % Inputs: #1 = left title; #2 = right location; #3 = left subtitle; #4 = right date.
 % Outputs: One primary heading block in the generated resume PDF.
 \newcommand{\resumeSubheading}[4]{
-  \vspace{2pt}\item
+  \vspace{\resumePrimaryHeadingBeforeSpacing}\item
     \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-2pt}
+    \end{tabular*}\vspace{\resumePrimaryHeadingAfterSpacing}
 }
 
 % RME:
 % Requires: #1 and #2 contain role and date text.
 % Modifies: The active resume subheading list by adding one secondary entry.
-% Effects: Typesets an additional role under the previous organization with readable separation.
+% Effects: Typesets an additional role under the previous organization using centralized spacing variables.
 % Inputs: #1 = left role text; #2 = right date text.
 % Outputs: One secondary heading block in the generated resume PDF.
 \newcommand{\resumeSubSubheading}[2]{
-    \vspace{4pt}\item
+    \vspace{\resumeSecondaryHeadingBeforeSpacing}\item
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
       \textit{\small#1} & \textit{\small #2} \\
-    \end{tabular*}\vspace{-2pt}
+    \end{tabular*}\vspace{\resumeSecondaryHeadingAfterSpacing}
 }
 
 % RME:
 % Requires: #1 and #2 contain project title/details and optional right-side text.
 % Modifies: The active resume subheading list by adding one project heading.
-% Effects: Typesets a project heading with modest separation before its bullets.
+% Effects: Typesets a project heading using centralized spacing variables.
 % Inputs: #1 = project heading text; #2 = optional right-aligned text.
 % Outputs: One project heading block in the generated resume PDF.
 \newcommand{\resumeProjectHeading}[2]{
-    \vspace{4pt}\item
+    \vspace{\resumeProjectHeadingBeforeSpacing}\item
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
       \small#1 & #2 \\
-    \end{tabular*}\vspace{-2pt}
+    \end{tabular*}\vspace{\resumeProjectHeadingAfterSpacing}
 }
 
 % RME:
 % Requires: #1 contains a short non-bulleted detail line.
 % Modifies: The active education list by adding one aligned detail row.
-% Effects: Renders supporting education details without opening a bullet list.
+% Effects: Renders supporting education details using centralized spacing variables.
 % Inputs: #1 = detail text.
 % Outputs: Typeset detail line in the generated resume PDF.
 \newcommand{\resumeEducationDetail}[1]{
-    \vspace{1pt}\item[]
-    \small{#1}\vspace{-2pt}
+    \vspace{\resumeEducationDetailBeforeSpacing}\item[]
+    \small{#1}\vspace{\resumeEducationDetailAfterSpacing}
 }
 
 % RME:
 % Requires: #1 contains a nested bullet body string.
 % Modifies: The active itemize environment by adding one compact nested item.
-% Effects: Typesets a compact nested resume item.
+% Effects: Typesets a compact nested resume item using centralized spacing variables.
 % Inputs: #1 = nested bullet text.
 % Outputs: One nested bullet item in the generated resume PDF.
-\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-2pt}}
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{\resumeNestedSubItemAfterSpacing}}
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}, topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=0pt]}
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-1pt}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.22in, topsep=3pt, partopsep=0pt, parsep=0pt, itemsep=2pt]}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2pt}}
+% RME:
+% Requires: resume-spacing.tex has defined the heading-list spacing variables.
+% Modifies: Starts a heading-level itemize environment.
+% Effects: Applies centralized spacing controls to school, company, role, and project entries.
+% Inputs: No arguments.
+% Outputs: An open itemize environment for resume headings.
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}, topsep=\resumeHeadingListTopSep, partopsep=\resumeHeadingListPartopSep, parsep=\resumeHeadingListParsep, itemsep=\resumeHeadingListItemSep]}
+
+% RME:
+% Requires: A heading-level itemize environment is currently open.
+% Modifies: Closes the active heading-level itemize environment.
+% Effects: Applies centralized spacing after the heading list closes.
+% Inputs: No arguments.
+% Outputs: A closed itemize environment plus trailing vertical spacing.
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{\resumeHeadingListAfterSpacing}}
+
+% RME:
+% Requires: resume-spacing.tex has defined the bullet-list spacing variables.
+% Modifies: Starts a bullet-level itemize environment.
+% Effects: Applies centralized spacing controls to bullets inside a role or project.
+% Inputs: No arguments.
+% Outputs: An open itemize environment for resume bullets.
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.22in, topsep=\resumeBulletListTopSep, partopsep=\resumeBulletListPartopSep, parsep=\resumeBulletListParsep, itemsep=\resumeBulletListItemSep]}
+
+% RME:
+% Requires: A bullet-level itemize environment is currently open.
+% Modifies: Closes the active bullet-level itemize environment.
+% Effects: Applies centralized spacing after the bullet list closes.
+% Inputs: No arguments.
+% Outputs: A closed itemize environment plus trailing vertical spacing.
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{\resumeBulletListAfterSpacing}}
 
 \definecolor{Black}{RGB}{0, 0, 0}
 \newcommand{\seticon}[1]{\textcolor{Black}{\csname #1\endcsname}}
