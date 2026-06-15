@@ -1,0 +1,221 @@
+%-------------------------%
+% Resume spacing variables
+%
+% Edit this file to tune spacing across the resume.
+% All values are LaTeX lengths unless otherwise noted.
+% Use pt for fine vertical adjustments and in for page or list spacing.
+% Positive vertical values add space. Negative vertical values remove space.
+%
+% RME:
+% Requires: This file is loaded before section formatting, heading content, and custom resume commands.
+% Modifies: Named LaTeX length registers and layout macros that control resume spacing.
+% Effects: Centralizes adjustable layout values so spacing can be tuned from one file.
+% Inputs: The length and layout values assigned below.
+% Outputs: Named spacing variables consumed by resume.tex, layout/commands.tex, and content/*.tex.
+
+%-------------------------%
+% Page and global layout spacing
+%-------------------------%
+
+% Distance reserved for the footer area at the bottom of the page.
+\newlength{\resumeFooterSkip}
+\setlength{\resumeFooterSkip}{5pt}
+
+% Horizontal page margin adjustment applied to both odd- and even-numbered pages.
+% Increase this value to move the resume body right.
+% Decrease this value to move the resume body left.
+\newlength{\resumeSideMarginAdjustment}
+\setlength{\resumeSideMarginAdjustment}{-0.5in}
+
+% Width added to the default text block.
+\newlength{\resumeTextWidthAdjustment}
+\setlength{\resumeTextWidthAdjustment}{1in}
+
+% Top page margin adjustment.
+\newlength{\resumeTopMarginAdjustment}
+\setlength{\resumeTopMarginAdjustment}{-0.8in}
+
+% Height added to the default text block.
+\newlength{\resumeTextHeightAdjustment}
+\setlength{\resumeTextHeightAdjustment}{1.2in}
+
+% Horizontal padding inside tabular columns. The resume usually keeps this at zero.
+\newlength{\resumeTabularColumnSpacing}
+\setlength{\resumeTabularColumnSpacing}{0in}
+
+% Width used by header tables.
+% This is a layout macro rather than a length register so it tracks the current text width.
+\newcommand{\resumeHeaderTableWidth}{\textwidth}
+
+% Width used by heading tables for schools, companies, roles, and projects.
+% This is a layout macro rather than a length register so it tracks the current text width.
+\newcommand{\resumeHeadingTableWidth}{0.97\textwidth}
+
+%-------------------------%
+% Resume header spacing
+%-------------------------%
+
+% Space between the name/location row and the contact-links row.
+\newlength{\resumeHeaderNameToLinksSpacing}
+\setlength{\resumeHeaderNameToLinksSpacing}{2pt}
+
+% Space between the end of the header block and the first section heading.
+\newlength{\resumeHeaderAfterSpacing}
+\setlength{\resumeHeaderAfterSpacing}{-8pt}
+
+%-------------------------%
+% Section heading spacing
+%-------------------------%
+
+% Left indent for each top-level section heading, such as Education or Work Experience.
+\newlength{\resumeSectionLeftIndent}
+\setlength{\resumeSectionLeftIndent}{0pt}
+
+% Separation between a section label and its title body.
+% This resume does not use numbered section labels, so this is usually zero.
+\newlength{\resumeSectionLabelSeparation}
+\setlength{\resumeSectionLabelSeparation}{0em}
+
+% Fallback space inserted above each top-level section heading by titlesec.
+% Keep this near zero when using the explicit \resumeBeforeNextSection command.
+\newlength{\resumeSectionBeforeSpacing}
+\setlength{\resumeSectionBeforeSpacing}{0pt}
+
+% Space inserted below each top-level section rule before the section contents begin.
+\newlength{\resumeSectionAfterSpacing}
+\setlength{\resumeSectionAfterSpacing}{2pt}
+
+%-------------------------%
+% Relationship spacing
+%-------------------------%
+
+% Space between two education entries, such as UT Austin and University of Michigan.
+\newlength{\resumeGapAfterEducationEntryBeforeNextEducationEntry}
+\setlength{\resumeGapAfterEducationEntryBeforeNextEducationEntry}{2pt}
+
+% Space between the final bullet of one role and the next role heading under the same company.
+% Example: KBR Software Engineer bullets -> KBR Software Engineer Intern heading.
+\newlength{\resumeGapAfterRoleBulletListBeforeNextRoleHeading}
+\setlength{\resumeGapAfterRoleBulletListBeforeNextRoleHeading}{2pt}
+
+% Space between the final bullet of one company and the next company heading.
+% Example: final KBR role bullets -> Harman International heading.
+\newlength{\resumeGapAfterCompanyBulletListBeforeNextCompanyHeading}
+\setlength{\resumeGapAfterCompanyBulletListBeforeNextCompanyHeading}{4pt}
+
+% Space between the final content of one section and the next top-level section heading.
+% Example: final Work Experience bullet -> Software Projects heading.
+\newlength{\resumeGapAfterSectionContentBeforeNextSectionHeading}
+\setlength{\resumeGapAfterSectionContentBeforeNextSectionHeading}{6pt}
+
+% Space between the final bullet of one project and the next project heading.
+\newlength{\resumeGapAfterProjectBulletListBeforeNextProjectHeading}
+\setlength{\resumeGapAfterProjectBulletListBeforeNextProjectHeading}{3pt}
+
+%-------------------------%
+% Primary heading internal spacing
+%-------------------------%
+
+% Space inserted immediately before a primary heading command renders.
+% Usually keep this at zero and use relationship spacing variables above instead.
+\newlength{\resumePrimaryHeadingBeforeSpacing}
+\setlength{\resumePrimaryHeadingBeforeSpacing}{0pt}
+
+% Space inserted after a primary heading before details or bullets begin.
+\newlength{\resumePrimaryHeadingAfterSpacing}
+\setlength{\resumePrimaryHeadingAfterSpacing}{-2pt}
+
+%-------------------------%
+% Secondary heading internal spacing
+%-------------------------%
+
+% Space inserted immediately before a secondary heading command renders.
+% Usually keep this at zero and use \resumeGapAfterRoleBulletListBeforeNextRoleHeading instead.
+\newlength{\resumeSecondaryHeadingBeforeSpacing}
+\setlength{\resumeSecondaryHeadingBeforeSpacing}{0pt}
+
+% Space inserted after a secondary heading before bullets begin.
+\newlength{\resumeSecondaryHeadingAfterSpacing}
+\setlength{\resumeSecondaryHeadingAfterSpacing}{-2pt}
+
+%-------------------------%
+% Project heading internal spacing
+%-------------------------%
+
+% Space inserted immediately before each project heading command renders.
+% Usually keep this at zero and use \resumeGapAfterProjectBulletListBeforeNextProjectHeading instead.
+\newlength{\resumeProjectHeadingBeforeSpacing}
+\setlength{\resumeProjectHeadingBeforeSpacing}{0pt}
+
+% Space inserted after each project heading before bullets begin.
+\newlength{\resumeProjectHeadingAfterSpacing}
+\setlength{\resumeProjectHeadingAfterSpacing}{-2pt}
+
+%-------------------------%
+% Education detail spacing
+%-------------------------%
+
+% Space inserted before non-bulleted education detail rows, such as honors or coursework.
+\newlength{\resumeEducationDetailBeforeSpacing}
+\setlength{\resumeEducationDetailBeforeSpacing}{-2pt}
+
+% Space inserted after non-bulleted education detail rows.
+\newlength{\resumeEducationDetailAfterSpacing}
+\setlength{\resumeEducationDetailAfterSpacing}{2pt}
+
+%-------------------------%
+% Nested item spacing
+%-------------------------%
+
+% Extra space inserted after nested sub-items created with \resumeSubItem.
+\newlength{\resumeNestedSubItemAfterSpacing}
+\setlength{\resumeNestedSubItemAfterSpacing}{-2pt}
+
+%-------------------------%
+% Heading list spacing
+%-------------------------%
+
+% Left indent for heading entries, including schools, companies, roles, and projects.
+\newlength{\resumeHeadingListLeftMargin}
+\setlength{\resumeHeadingListLeftMargin}{0.15in}
+
+% Space above the first item in each heading list.
+\newlength{\resumeHeadingListTopSep}
+\setlength{\resumeHeadingListTopSep}{0pt}
+
+% Space added for paragraph separation inside heading lists.
+\newlength{\resumeHeadingListParsep}
+\setlength{\resumeHeadingListParsep}{0pt}
+
+% Space added before heading lists when they begin after a blank line or paragraph break.
+\newlength{\resumeHeadingListPartopSep}
+\setlength{\resumeHeadingListPartopSep}{0pt}
+
+% Space between entries in heading lists.
+% Keep this at zero when using the explicit relationship spacing variables above.
+\newlength{\resumeHeadingListItemSep}
+\setlength{\resumeHeadingListItemSep}{0pt}
+
+%-------------------------%
+% Bullet list spacing
+%-------------------------%
+
+% Left indent for bullet lists under roles and projects.
+\newlength{\resumeBulletListLeftMargin}
+\setlength{\resumeBulletListLeftMargin}{0.22in}
+
+% Space between a role/project heading and its first bullet.
+\newlength{\resumeBulletListTopSep}
+\setlength{\resumeBulletListTopSep}{3pt}
+
+% Space added for paragraph separation inside bullet lists.
+\newlength{\resumeBulletListParsep}
+\setlength{\resumeBulletListParsep}{0pt}
+
+% Space added before bullet lists when they begin after a blank line or paragraph break.
+\newlength{\resumeBulletListPartopSep}
+\setlength{\resumeBulletListPartopSep}{0pt}
+
+% Space between bullets within the same role or project.
+\newlength{\resumeBulletListItemSep}
+\setlength{\resumeBulletListItemSep}{2pt}
