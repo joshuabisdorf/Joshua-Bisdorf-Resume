@@ -19,7 +19,7 @@
 % Outputs: One primary heading block in the generated resume PDF.
 \newcommand{\resumeSubheading}[4]{
   \vspace{\resumePrimaryHeadingBeforeSpacing}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \begin{tabular*}{\resumeHeadingTableWidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \textit{\small#3} & \textit{\small #4} \\
     \end{tabular*}\vspace{\resumePrimaryHeadingAfterSpacing}
@@ -33,7 +33,7 @@
 % Outputs: One secondary heading block in the generated resume PDF.
 \newcommand{\resumeSubSubheading}[2]{
     \vspace{\resumeSecondaryHeadingBeforeSpacing}\item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \begin{tabular*}{\resumeHeadingTableWidth}{l@{\extracolsep{\fill}}r}
       \textit{\small#1} & \textit{\small #2} \\
     \end{tabular*}\vspace{\resumeSecondaryHeadingAfterSpacing}
 }
@@ -46,7 +46,7 @@
 % Outputs: One project heading block in the generated resume PDF.
 \newcommand{\resumeProjectHeading}[2]{
     \vspace{\resumeProjectHeadingBeforeSpacing}\item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \begin{tabular*}{\resumeHeadingTableWidth}{l@{\extracolsep{\fill}}r}
       \small#1 & #2 \\
     \end{tabular*}\vspace{\resumeProjectHeadingAfterSpacing}
 }
@@ -78,7 +78,7 @@
 % Effects: Applies centralized spacing controls to school, company, role, and project entries.
 % Inputs: No arguments.
 % Outputs: An open itemize environment for resume headings.
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}, topsep=\resumeHeadingListTopSep, partopsep=\resumeHeadingListPartopSep, parsep=\resumeHeadingListParsep, itemsep=\resumeHeadingListItemSep]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=\resumeHeadingListLeftMargin, label={}, topsep=\resumeHeadingListTopSep, partopsep=\resumeHeadingListPartopSep, parsep=\resumeHeadingListParsep, itemsep=\resumeHeadingListItemSep]}
 
 % RME:
 % Requires: A heading-level itemize environment is currently open.
@@ -94,7 +94,7 @@
 % Effects: Applies centralized spacing controls to bullets inside a role or project.
 % Inputs: No arguments.
 % Outputs: An open itemize environment for resume bullets.
-\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.22in, topsep=\resumeBulletListTopSep, partopsep=\resumeBulletListPartopSep, parsep=\resumeBulletListParsep, itemsep=\resumeBulletListItemSep]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=\resumeBulletListLeftMargin, topsep=\resumeBulletListTopSep, partopsep=\resumeBulletListPartopSep, parsep=\resumeBulletListParsep, itemsep=\resumeBulletListItemSep]}
 
 % RME:
 % Requires: A bullet-level itemize environment is currently open.
