@@ -1,22 +1,63 @@
 %-------------------------%
 % Resume spacing variables
 %
-% Edit this file to tune vertical spacing across the resume.
-% All values are LaTeX lengths. Use pt for fine-grained adjustments.
-% Positive values add space. Negative values remove space.
+% Edit this file to tune spacing across the resume.
+% All values are LaTeX lengths unless otherwise noted.
+% Use pt for fine vertical adjustments and in for page or list spacing.
+% Positive vertical values add space. Negative vertical values remove space.
 %
 % RME:
 % Requires: This file is loaded before section formatting and custom resume commands.
-% Modifies: Named LaTeX length registers that control resume vertical spacing.
+% Modifies: Named LaTeX length registers and layout macros that control resume spacing.
 % Effects: Centralizes spacing controls so layout can be adjusted from one file.
-% Inputs: The length values assigned below.
+% Inputs: The length and layout values assigned below.
 % Outputs: Named spacing variables consumed by resume.tex and custom-commands.tex.
+
+%-------------------------%
+% Page and global layout spacing
+%-------------------------%
+
+% Distance reserved for the footer area at the bottom of the page.
+\newlength{\resumeFooterSkip}
+\setlength{\resumeFooterSkip}{5pt}
+
+% Left page margin adjustment for odd-numbered pages.
+\newlength{\resumeOddSideMarginAdjustment}
+\setlength{\resumeOddSideMarginAdjustment}{-0.5in}
+
+% Left page margin adjustment for even-numbered pages.
+\newlength{\resumeEvenSideMarginAdjustment}
+\setlength{\resumeEvenSideMarginAdjustment}{-0.5in}
+
+% Width added to the default text block.
+\newlength{\resumeTextWidthAdjustment}
+\setlength{\resumeTextWidthAdjustment}{1in}
+
+% Top page margin adjustment.
+\newlength{\resumeTopMarginAdjustment}
+\setlength{\resumeTopMarginAdjustment}{-0.8in}
+
+% Height added to the default text block.
+\newlength{\resumeTextHeightAdjustment}
+\setlength{\resumeTextHeightAdjustment}{1.2in}
+
+% Horizontal padding inside tabular columns. The resume usually keeps this at zero.
+\newlength{\resumeTabularColumnSpacing}
+\setlength{\resumeTabularColumnSpacing}{0in}
+
+% Width used by heading tables for schools, companies, roles, and projects.
+% This is a layout macro rather than a length register so it tracks the current text width.
+\newcommand{\resumeHeadingTableWidth}{0.97\textwidth}
 
 %-------------------------%
 % Section heading spacing
 %-------------------------%
 
-% Space inserted above each top-level section heading, such as Education or Work Experience.
+% Left indent for each top-level section heading, such as Education or Work Experience.
+\newlength{\resumeSectionLeftIndent}
+\setlength{\resumeSectionLeftIndent}{0pt}
+
+% Space inserted above each top-level section heading.
 \newlength{\resumeSectionBeforeSpacing}
 \setlength{\resumeSectionBeforeSpacing}{9pt}
 
@@ -84,6 +125,10 @@
 % Heading list spacing
 %-------------------------%
 
+% Left indent for heading entries, including schools, companies, roles, and projects.
+\newlength{\resumeHeadingListLeftMargin}
+\setlength{\resumeHeadingListLeftMargin}{0.15in}
+
 % Space above the first item in each heading list.
 \newlength{\resumeHeadingListTopSep}
 \setlength{\resumeHeadingListTopSep}{0pt}
@@ -107,6 +152,10 @@
 %-------------------------%
 % Bullet list spacing
 %-------------------------%
+
+% Left indent for bullet lists under roles and projects.
+\newlength{\resumeBulletListLeftMargin}
+\setlength{\resumeBulletListLeftMargin}{0.22in}
 
 % Space between a role/project heading and its first bullet.
 \newlength{\resumeBulletListTopSep}
