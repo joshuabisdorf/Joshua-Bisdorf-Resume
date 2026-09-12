@@ -38,7 +38,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
       - name: Download Atkinson Hyperlegible Next
         shell: bash
@@ -72,7 +72,7 @@ jobs:
           echo "RESUME_PDF=$output_file" >> "$GITHUB_ENV"
 
       - name: Upload compiled resume
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.RESUME_PDF }}
           path: ${{ env.RESUME_PDF }}
