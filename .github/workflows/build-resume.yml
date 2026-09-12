@@ -1,7 +1,7 @@
 # RME:
 # Requires: resume.tex and its content/layout dependencies; GitHub Actions network access.
 # Modifies: The tracked dated resume PDF on pushes to main.
-# Effects: Downloads the required font, compiles the resume with XeLaTeX, uploads the PDF as an Actions artifact, and commits the generated PDF on main.
+# Effects: Downloads the required static font files, compiles the resume with XeLaTeX, uploads the PDF as an Actions artifact, and commits the generated PDF on main.
 # Inputs: LaTeX source files and the commit date.
 # Outputs: Joshua-Bisdorf_Resume_MM-DD-YYYY.pdf.
 
@@ -44,12 +44,18 @@ jobs:
         shell: bash
         run: |
           mkdir -p .ci/fonts
-          curl --fail --location --retry 3 \
-            --output '.ci/fonts/AtkinsonHyperlegibleNext[wght].ttf' \
-            'https://raw.githubusercontent.com/google/fonts/main/ofl/atkinsonhyperlegiblenext/AtkinsonHyperlegibleNext%5Bwght%5D.ttf'
-          curl --fail --location --retry 3 \
-            --output '.ci/fonts/AtkinsonHyperlegibleNext-Italic[wght].ttf' \
-            'https://raw.githubusercontent.com/google/fonts/main/ofl/atkinsonhyperlegiblenext/AtkinsonHyperlegibleNext-Italic%5Bwght%5D.ttf'
+          font_base_url='https://raw.githubusercontent.com/googlefonts/atkinson-hyperlegible-next/main/fonts/ttf'
+
+          for font_file in \
+            AtkinsonHyperlegibleNext-Regular.ttf \
+            AtkinsonHyperlegibleNext-Bold.ttf \
+            AtkinsonHyperlegibleNext-Italic.ttf \
+            AtkinsonHyperlegibleNext-BoldItalic.ttf
+          do
+            curl --fail --location --retry 3 \
+              --output ".ci/fonts/${font_file}" \
+              "${font_base_url}/${font_file}"
+          done
 
       - name: Compile resume with XeLaTeX
         uses: xu-cheng/latex-action@v4
