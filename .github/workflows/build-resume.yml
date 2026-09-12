@@ -1,0 +1,96 @@
+# RME:
+# Requires: resume.tex and its content/layout dependencies; GitHub Actions network access.
+# Modifies: The tracked dated resume PDF on pushes to main.
+# Effects: Downloads the required font, compiles the resume with XeLaTeX, uploads the PDF as an Actions artifact, and commits the generated PDF on main.
+# Inputs: LaTeX source files and the commit date.
+# Outputs: Joshua-Bisdorf_Resume_MM-DD-YYYY.pdf.
+
+name: Build Resume PDF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "resume.tex"
+      - "content/**/*.tex"
+      - "layout/**/*.tex"
+      - "**/*.cls"
+      - "**/*.sty"
+      - ".github/workflows/build-resume.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "resume.tex"
+      - "content/**/*.tex"
+      - "layout/**/*.tex"
+      - "**/*.cls"
+      - "**/*.sty"
+      - ".github/workflows/build-resume.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build-resume:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Download Atkinson Hyperlegible Next
+        shell: bash
+        run: |
+          mkdir -p .ci/fonts
+          curl --fail --location --retry 3 \
+            --output '.ci/fonts/AtkinsonHyperlegibleNext[wght].ttf' \
+            'https://raw.githubusercontent.com/google/fonts/main/ofl/atkinsonhyperlegiblenext/AtkinsonHyperlegibleNext%5Bwght%5D.ttf'
+          curl --fail --location --retry 3 \
+            --output '.ci/fonts/AtkinsonHyperlegibleNext-Italic[wght].ttf' \
+            'https://raw.githubusercontent.com/google/fonts/main/ofl/atkinsonhyperlegiblenext/AtkinsonHyperlegibleNext-Italic%5Bwght%5D.ttf'
+
+      - name: Compile resume with XeLaTeX
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: resume.tex
+          latexmk_use_xelatex: true
+          extra_fonts: .ci/fonts/*.ttf
+
+      - name: Apply dated resume filename
+        shell: bash
+        env:
+          TZ: America/Toronto
+        run: |
+          update_date="$(date -d "$(git show -s --format=%cI HEAD)" +'%m-%d-%Y')"
+          output_file="Joshua-Bisdorf_Resume_${update_date}.pdf"
+
+          rm -f Joshua-Bisdorf_Resume_*.pdf
+          mv resume.pdf "$output_file"
+
+          echo "RESUME_PDF=$output_file" >> "$GITHUB_ENV"
+
+      - name: Upload compiled resume
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ env.RESUME_PDF }}
+          path: ${{ env.RESUME_PDF }}
+          if-no-files-found: error
+
+      - name: Commit generated PDF to main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A -- 'Joshua-Bisdorf_Resume_'*.pdf
+
+          if git diff --cached --quiet; then
+            echo "Generated PDF is unchanged."
+            exit 0
+          fi
+
+          git commit -m "build: update dated resume PDF [skip ci]"
+          git push
