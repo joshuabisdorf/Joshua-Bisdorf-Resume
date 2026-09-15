@@ -1,0 +1,18 @@
+# RME:
+# Requires: GitHub Dependabot.
+# Modifies: No repository files directly.
+# Effects: Checks GitHub Actions dependencies weekly and creates update PRs
+#          when newer versions are available.
+# Inputs: Action dependencies referenced by workflows in .github/workflows/.
+# Outputs: Dependabot pull requests for available GitHub Actions updates.
+
+version: 2
+
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
