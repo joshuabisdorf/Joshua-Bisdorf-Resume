@@ -1,9 +1,11 @@
 # RME:
-# Requires: resume.tex and its content/layout dependencies; GitHub Actions network access.
-# Modifies: The tracked dated resume PDF on pushes to main.
-# Effects: Downloads the required static font files, compiles the resume with XeLaTeX, uploads the PDF as an Actions artifact, and commits the generated PDF on main.
-# Inputs: LaTeX source files and the commit date.
-# Outputs: Joshua-Bisdorf_Resume_MM-DD-YYYY.pdf.
+# Requires: resume.tex and its content/layout dependencies; GitHub Actions
+#           network access.
+# Modifies: No repository files.
+# Effects: Downloads the pinned static font files, compiles the resume with
+#          XeLaTeX, and uploads the compiled PDF as a GitHub Actions artifact.
+# Inputs: LaTeX source files and layout/content dependencies.
+# Outputs: A compiled Joshua-Bisdorf_Resume_<date>.pdf Actions artifact.
 
 name: Build Resume PDF
 
@@ -18,6 +20,7 @@ on:
       - "**/*.cls"
       - "**/*.sty"
       - ".github/workflows/build-resume.yml"
+
   pull_request:
     branches:
       - main
@@ -30,21 +33,26 @@ on:
       - ".github/workflows/build-resume.yml"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build-resume:
+    name: Build and verify
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
 
       - name: Download Atkinson Hyperlegible Next
         shell: bash
         run: |
           mkdir -p .ci/fonts
-          font_base_url='https://raw.githubusercontent.com/googlefonts/atkinson-hyperlegible-next/main/fonts/ttf'
+
+          font_base_url='https://raw.githubusercontent.com/googlefonts/atkinson-hyperlegible-next/7925f50f649b3813257faf2f4c0b381011f434f1/fonts/ttf'
 
           for font_file in \
             AtkinsonHyperlegibleNext-Regular.ttf \
@@ -52,51 +60,35 @@ jobs:
             AtkinsonHyperlegibleNext-Italic.ttf \
             AtkinsonHyperlegibleNext-BoldItalic.ttf
           do
-            curl --fail --location --retry 3 \
+            curl \
+              --fail \
+              --location \
+              --retry 3 \
+              --proto '=https' \
+              --tlsv1.2 \
               --output ".ci/fonts/${font_file}" \
               "${font_base_url}/${font_file}"
           done
 
       - name: Compile resume with XeLaTeX
-        uses: xu-cheng/latex-action@v4
+        uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b # v4
         with:
           root_file: resume.tex
           latexmk_use_xelatex: true
           extra_fonts: .ci/fonts/*.ttf
 
-      - name: Apply dated resume filename
+      - name: Apply artifact filename
         shell: bash
-        env:
-          TZ: America/Toronto
         run: |
-          update_date="$(date -d "$(git show -s --format=%cI HEAD)" +'%m-%d-%Y')"
-          output_file="Joshua-Bisdorf_Resume_${update_date}.pdf"
+          output_file="Joshua-Bisdorf_Resume_$(date -u +'%m-%d-%Y').pdf"
 
-          rm -f Joshua-Bisdorf_Resume_*.pdf
           mv resume.pdf "$output_file"
 
           echo "RESUME_PDF=$output_file" >> "$GITHUB_ENV"
 
       - name: Upload compiled resume
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: ${{ env.RESUME_PDF }}
           path: ${{ env.RESUME_PDF }}
           if-no-files-found: error
-
-      - name: Commit generated PDF to main
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add -A -- 'Joshua-Bisdorf_Resume_'*.pdf
-
-          if git diff --cached --quiet; then
-            echo "Generated PDF is unchanged."
-            exit 0
-          fi
-
-          git commit -m "build: update dated resume PDF [skip ci]"
-          git push
