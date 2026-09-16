@@ -79,8 +79,10 @@ jobs:
 
       - name: Apply artifact filename
         shell: bash
+        env:
+          TZ: America/Detroit
         run: |
-          output_file="Joshua-Bisdorf_Resume_$(date -u +'%m-%d-%Y').pdf"
+          output_file="Joshua-Bisdorf_Resume_$(date +'%m-%d-%Y').pdf"
 
           mv resume.pdf "$output_file"
 
