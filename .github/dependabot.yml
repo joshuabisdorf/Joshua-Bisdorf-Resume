@@ -1,10 +1,11 @@
 # RME:
-# Requires: GitHub Dependabot.
+# Requires: GitHub Dependabot and repository Actions workflow files.
 # Modifies: No repository files directly.
-# Effects: Checks GitHub Actions dependencies weekly and creates update PRs
-#          when newer versions are available.
-# Inputs: Action dependencies referenced by workflows in .github/workflows/.
-# Outputs: Dependabot pull requests for available GitHub Actions updates.
+# Effects: Checks for routine GitHub Actions updates monthly; creates
+#          grouped minor/patch PRs and individual major-version PRs.
+#          Security updates remain independent of this schedule.
+# Inputs: Action dependencies referenced in .github/workflows/.
+# Outputs: Dependabot pull requests for available Actions updates.
 
 version: 2
 
@@ -12,7 +13,16 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "monthly"
       time: "09:00"
-    open-pull-requests-limit: 5
+      timezone: "America/New_York"
+    open-pull-requests-limit: 3
+    groups:
+      actions-routine:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    # Major version upgrades get individual PRs.
