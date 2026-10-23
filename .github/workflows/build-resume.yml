@@ -24,13 +24,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - "resume.tex"
-      - "content/**/*.tex"
-      - "layout/**/*.tex"
-      - "**/*.cls"
-      - "**/*.sty"
-      - ".github/workflows/build-resume.yml"
 
 permissions:
   contents: read
