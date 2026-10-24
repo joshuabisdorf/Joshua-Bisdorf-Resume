@@ -44,12 +44,14 @@ individual jobs or projects in `resume.tex`.
 The content files use a small set of macros. For example:
 
 ```tex
+\resumeSubHeadingListStart
 \resumeSubheading
 {Company}{Location}
 {Role \textnormal{$|$ \emph{C++, CUDA, MATLAB, Python}}}{January 2026 -- Present}
 \resumeItemListStart
     \resumeItem{Concise, verifiable accomplishment or responsibility}
 \resumeItemListEnd
+\resumeSubHeadingListEnd
 ```
 
 Use `\resumeBetweenSameCompanyRoles`,
