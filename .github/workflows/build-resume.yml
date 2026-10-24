@@ -1,11 +1,6 @@
-# RME:
-# Requires: resume.tex and its content/layout dependencies; GitHub Actions
-#           network access.
-# Modifies: No repository files.
-# Effects: Downloads the pinned static font files, compiles the resume with
-#          XeLaTeX, and uploads the compiled PDF as a GitHub Actions artifact.
-# Inputs: LaTeX source files and layout/content dependencies.
-# Outputs: A compiled Joshua-Bisdorf_Resume_<date>.pdf Actions artifact.
+# Compile the LaTeX source with XeLaTeX and upload the generated PDF.
+# The pinned Google Fonts snapshot supplies four Atkinson font styles in CI.
+# The build artifact is not committed to the repository.
 
 name: Build Resume PDF
 
